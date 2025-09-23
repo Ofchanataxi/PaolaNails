@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - PaolaNails</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h2>PaolaNails</h2>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="contact">
+    <div class="container">
+      <h2>Contáctanos</h2>
+      
+      <!-- Información de contacto principal -->
+      <div class="contact-info-main">
+        <div class="contact-card">
+          <h3><i class="fab fa-whatsapp"></i> WhatsApp</h3>
+          <p>¡La forma más rápida de agendar tu cita!</p>
+          <a href="https://wa.me/593968579842" class="contact-link whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> 0968579842
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <h3><i class="fas fa-map-marker-alt"></i> Ubicación</h3>
+          <p>Nos encuentras en:</p>
+          <address>
+            Vía Amaguaña - Cuendina<br>
+            Puente rojo<br>
+            Ecuador
+          </address>
+        </div>
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="social-section">
+        <h3>Síguenos en nuestras redes sociales</h3>
+        <div class="social-cards">
+          <div class="social-card">
+            <div class="social-icon-large facebook">
+              <i class="fab fa-facebook-f"></i>
+            </div>
+            <h4>Facebook</h4>
+            <p>Paola Nails</p>
+            <a href="https://www.facebook.com/PaolaNails" target="_blank" class="social-link">
+              Seguir en Facebook
+            </a>
+          </div>
+
+          <div class="social-card">
+            <div class="social-icon-large instagram">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <h4>Instagram</h4>
+            <p>@pao_nails593</p>
+            <a href="https://www.instagram.com/pao_nails593" target="_blank" class="social-link">
+              Seguir en Instagram
+            </a>
+          </div>
+
+          <div class="social-card">
+            <div class="social-icon-large tiktok">
+              <i class="fab fa-tiktok"></i>
+            </div>
+            <h4>TikTok</h4>
+            <p>pao_nails593</p>
+            <a href="https://www.tiktok.com/@pao_nails593" target="_blank" class="social-link">
+              Seguir en TikTok
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de contacto -->
+      <div class="contact-form-section">
+        <h3>Envíanos un mensaje</h3>
+        <form class="contact-form" action="https://wa.me/593968579842" method="get" target="_blank">
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" required>
+          </div>
+
+          <div class="form-group">
+            <label for="servicio">Servicio de interés</label>
+            <select id="servicio" name="servicio" required>
+              <option value="">Selecciona un servicio</option>
+              <option value="Manicura clásica">Manicura clásica</option>
+              <option value="Pedicura spa">Pedicura spa</option>
+              <option value="Nail Art">Nail Art</option>
+              <option value="Uñas acrílicas">Uñas acrílicas</option>
+              <option value="Uñas en gel">Uñas en gel</option>
+              <option value="Mantenimiento">Mantenimiento</option>
+              <option value="Consulta general">Consulta general</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos sobre el servicio que necesitas o cualquier pregunta que tengas..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" onclick="enviarWhatsApp()">
+            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+          </button>
+        </form>
+      </div>
+
+      <!-- Información adicional -->
+      <div class="additional-info">
+        <h3>Información importante</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <h4>Horarios</h4>
+            <p>Contáctanos para conocer nuestros horarios de atención</p>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-calendar-check"></i>
+            <h4>Citas</h4>
+            <p>Agenda tu cita con anticipación por WhatsApp</p>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-star"></i>
+            <h4>Calidad</h4>
+            <p>Cuidado profesional en estructuras naturales y artificiales</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 PaolaNails - Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="https://wa.me/593968579842" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/PaolaNails" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tiktok.com/@pao_nails593" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/pao_nails593" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

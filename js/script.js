@@ -198,6 +198,13 @@ function preloadImages() {
         'img/servicio6.jpg'
     ];
     
+    // Agregar imágenes del carrusel
+    for (let i = 1; i <= 19; i++) {
+        if (i !== 4) { // Saltar unas4.jpg ya que no existe
+            images.push(`img/unas${i}.jpg`);
+        }
+    }
+    
     images.forEach(src => {
         const img = new Image();
         img.src = src;
@@ -318,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSmoothScroll();
     preloadImages();
     setupFormValidation();
+    initCarousel();
     
     console.log('✅ PaolaNails - Website loaded successfully!');
 });
@@ -327,6 +335,140 @@ window.addEventListener('resize', function() {
     setupMobileMenu();
 });
 
+// Variables globales para el carrusel
+let currentIndex = 0;
+let totalImages = 0;
+let autoSlideInterval;
+
+// Función para inicializar el carrusel
+function initCarousel() {
+    const imagenes = document.getElementById('imagenes');
+    if (!imagenes) return;
+    
+    totalImages = imagenes.children.length;
+    
+    // Iniciar auto-slide cada 4 segundos
+    startAutoSlide();
+    
+    // Pausar auto-slide al hacer hover
+    const carrusel = document.querySelector('.carrusel');
+    if (carrusel) {
+        carrusel.addEventListener('mouseenter', stopAutoSlide);
+        carrusel.addEventListener('mouseleave', startAutoSlide);
+    }
+    
+    // Agregar soporte para touch/swipe en móviles
+    addTouchSupport();
+}
+
+// Función para mover el carrusel (la función que ya tenías)
+function mover(direction) {
+    const imagenes = document.getElementById('imagenes');
+    if (!imagenes) return;
+    
+    currentIndex += direction;
+    
+    // Loop infinito
+    if (currentIndex >= totalImages) {
+        currentIndex = 0;
+    } else if (currentIndex < 0) {
+        currentIndex = totalImages - 1;
+    }
+    
+    // Aplicar transformación
+    const translateX = -currentIndex * 100;
+    imagenes.style.transform = `translateX(${translateX}%)`;
+    
+    // Reiniciar el auto-slide
+    stopAutoSlide();
+    startAutoSlide();
+}
+
+// Auto-slide functionality
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        mover(1);
+    }, 4000); // Cambiar imagen cada 4 segundos
+}
+
+function stopAutoSlide() {
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+    }
+}
+
+// Soporte para touch/swipe en móviles
+function addTouchSupport() {
+    const carrusel = document.querySelector('.carrusel');
+    if (!carrusel) return;
+    
+    let startX = 0;
+    let startY = 0;
+    let endX = 0;
+    let endY = 0;
+    
+    carrusel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    carrusel.addEventListener('touchmove', (e) => {
+        // Prevenir scroll vertical si se está haciendo swipe horizontal
+        const deltaX = Math.abs(e.touches[0].clientX - startX);
+        const deltaY = Math.abs(e.touches[0].clientY - startY);
+        
+        if (deltaX > deltaY) {
+            e.preventDefault();
+        }
+    });
+    
+    carrusel.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        endY = e.changedTouches[0].clientY;
+        
+        const deltaX = startX - endX;
+        const deltaY = startY - endY;
+        
+        // Solo procesar swipe si es principalmente horizontal
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+                // Swipe left -> próxima imagen
+                mover(1);
+            } else {
+                // Swipe right -> imagen anterior
+                mover(-1);
+            }
+        }
+    });
+}
+
+// Función para precargar imágenes del carrusel
+function preloadCarouselImages() {
+    const carouselImages = [];
+    for (let i = 1; i <= 19; i++) {
+        if (i !== 4) { // Saltar unas4.jpg ya que no existe
+            carouselImages.push(`img/unas${i}.jpg`);
+        }
+    }
+    
+    carouselImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
+// Control por teclado (opcional)
+document.addEventListener('keydown', (e) => {
+    if (document.querySelector('.carrusel:hover')) {
+        if (e.key === 'ArrowLeft') {
+            mover(-1);
+        } else if (e.key === 'ArrowRight') {
+            mover(1);
+        }
+    }
+});
+
 // Exportar funciones para uso global
 window.enviarWhatsApp = enviarWhatsApp;
 window.showNotification = showNotification;
+window.mover = mover;
